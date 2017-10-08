@@ -41,6 +41,12 @@ resource "aws_iam_policy" "policy" {
 EOF
 }
 
+resource "null_resource" "wait_time" {
+  provisioner "local-exec" {
+    command = "sleep 10"
+  }
+}
+
 resource "aws_iam_role_policy_attachment" "test-attach" {
   role       = "${aws_iam_role.role.name}"
   policy_arn = "${aws_iam_policy.policy.arn}"
